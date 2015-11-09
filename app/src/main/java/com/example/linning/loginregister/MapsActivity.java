@@ -95,6 +95,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
         mMap.setMyLocationEnabled(true);
+        DisplayLocations displayLocations = new DisplayLocations(this, mMap);
+        displayLocations.fetchUserDataAsyncTask();
     }
 
 
