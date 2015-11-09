@@ -97,7 +97,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setMyLocationEnabled(true);
         DisplayLocations displayLocations = new DisplayLocations(this, mMap);
         displayLocations.fetchUserDataAsyncTask();
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,12.0f));
     }
 
 
