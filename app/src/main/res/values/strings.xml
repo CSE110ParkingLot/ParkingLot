@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Parking Lot</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_login">Login</string>
+    <string name="title_activity_login">Parking Finder</string>
     <string name="title_activity_register">Register</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_maps_activitydelete">Map</string>
