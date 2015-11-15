@@ -2,6 +2,9 @@ package com.example.linning.loginregister;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.IntentSender;
 import android.location.Address;
@@ -52,13 +55,17 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
         final Bundle savedInstanceStateFinal = savedInstanceState;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
         addButton = (Button) findViewById(R.id.addButton);
         addButton.setVisibility(View.GONE);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddButtonDialogFragment addButtonDialog = new AddButtonDialogFragment();
-                Dialog dialog = addButtonDialog.onCreateDialog(savedInstanceStateFinal) ;
+                FragmentManager manager = getFragmentManager();
+                DialogFragment addButtonDialog = new AddButtonDialogFragment();
+                addButtonDialog.show(manager, "gh");
+                //Dialog dialog = addButtonDialog.onCreateDialog(savedInstanceStateFinal);
+                //dialog.show();
             }
         });
         setUpMapIfNeeded();
