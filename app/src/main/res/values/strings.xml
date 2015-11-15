@@ -5,4 +5,7 @@
     <string name="title_activity_register">Register</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_maps_activitydelete">Map</string>
+    <string name="title">ADD PARKING INFO!</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
 </resources>

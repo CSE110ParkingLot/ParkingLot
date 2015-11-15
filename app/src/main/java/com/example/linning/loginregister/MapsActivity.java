@@ -1,6 +1,7 @@
 package com.example.linning.loginregister;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.IntentSender;
 import android.location.Address;
@@ -35,8 +36,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements LocationProvider.LocationCallback {
-
+public class MapsActivity extends FragmentActivity implements LocationProvider.LocationCallback{
     public static final String TAG = MapsActivity.class.getSimpleName();
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
@@ -48,15 +48,26 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
     private Marker newMarker;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
+        final Bundle savedInstanceStateFinal = savedInstanceState;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         addButton = (Button) findViewById(R.id.addButton);
         addButton.setVisibility(View.GONE);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddButtonDialogFragment addButtonDialog = new AddButtonDialogFragment();
+                Dialog dialog = addButtonDialog.onCreateDialog(savedInstanceStateFinal) ;
+            }
+        });
         setUpMapIfNeeded();
-
         mLocationProvider = new LocationProvider(this, this);
     }
+
+
+    //onDialogNegativeClick
+      //      onDialogNegativeClick
 
     @Override
     protected void onResume() {
