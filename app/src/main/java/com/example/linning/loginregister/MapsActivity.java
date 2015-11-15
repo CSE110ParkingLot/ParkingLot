@@ -17,6 +17,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -41,6 +42,8 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
     private LocationProvider mLocationProvider;
+    public DisplayLocations displayLocations;
+    private Button addButton;
 
     private Marker newMarker;
 
@@ -48,6 +51,8 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        addButton = (Button) findViewById(R.id.addButton);
+        addButton.setVisibility(View.GONE);
         setUpMapIfNeeded();
 
         mLocationProvider = new LocationProvider(this, this);
@@ -87,6 +92,7 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
+
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap();
@@ -111,9 +117,10 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
 
             Address address = addressList.get(0);
             LatLng latLng = new LatLng(address.getLatitude() , address.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+            newMarker = mMap.addMarker(new MarkerOptions().position(latLng).title(location));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
-
+            if(!displayLocations.isLocationStored(displayLocations.markers, newMarker))
+                 addButton.setVisibility(View.VISIBLE);
         }
     }
     /**
@@ -141,7 +148,10 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
         // mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.setMyLocationEnabled(true);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
-        DisplayLocations displayLocations = new DisplayLocations(this, mMap);
+        displayLocations = new DisplayLocations(this, mMap);
         displayLocations.fetchUserDataAsyncTask();
+
     }
+
+
 }

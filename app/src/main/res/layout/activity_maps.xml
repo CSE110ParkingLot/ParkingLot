@@ -34,10 +34,10 @@
             android:layout_height="wrap_content"
             tools:context=".MapsActivity">
             <Button
-                android:id="@+id/button"
+                android:id="@+id/addButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add"
+                android:text="Sell It!"
                 android:layout_gravity="bottom" />
         </fragment>
 
