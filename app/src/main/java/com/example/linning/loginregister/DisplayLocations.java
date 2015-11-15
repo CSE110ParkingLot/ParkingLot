@@ -6,6 +6,7 @@ package com.example.linning.loginregister;
 
         import com.google.android.gms.maps.GoogleMap;
         import com.google.android.gms.maps.model.LatLng;
+        import com.google.android.gms.maps.model.Marker;
         import com.google.android.gms.maps.model.MarkerOptions;
 
         import org.apache.http.HttpEntity;
@@ -30,13 +31,16 @@ public class DisplayLocations {
     ProgressDialog progressDialog;
     public static final int CONNECTION_TIMEOUT = 1000 * 15;
     public static final String SERVER_ADDRESS = "http://cse110gogogo.web44.net/";
+    public ArrayList<Marker> markers;
     private ArrayList<Double> longitude;
     private ArrayList<Double> latitude;
     private GoogleMap gMap;
+    private Marker marker;
 
     public DisplayLocations(Context context, GoogleMap map) {
         latitude = new ArrayList<Double>();
         longitude = new ArrayList<Double>();
+        markers = new ArrayList<Marker>();
         this.gMap = map;
         progressDialog = new ProgressDialog(context);
         progressDialog.setCancelable(false);
@@ -105,9 +109,11 @@ public class DisplayLocations {
                 double lat = latitude.get(i);
                 double longi = longitude.get(i);
                 LatLng locationparking = new LatLng(lat, longi);
-                map.addMarker(new MarkerOptions().position(locationparking).title("Marker for Parking Lot"));
+                marker = map.addMarker(new MarkerOptions().position(locationparking).title("Marker for Parking Lot"));
+                markers.add(marker);
             }
         }
+
     }
 
 //    protected void displayLocation(GoogleMap map){
@@ -119,4 +125,12 @@ public class DisplayLocations {
 //            map.addMarker(new MarkerOptions().position(locationparking).title("Marker for Parking Lot"));
 //        }
 //    }
+    public boolean isLocationStored(ArrayList<Marker> markers, Marker mark) {
+        for(int i = 0; i < markers.size() - 1; i++) {
+            if(markers.get(i).getPosition().latitude == mark.getPosition().latitude &&
+                    markers.get(i).getPosition().longitude == mark.getPosition().longitude)
+              return true;
+        }
+    return false;
+    }
 }

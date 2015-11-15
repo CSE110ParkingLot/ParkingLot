@@ -1,49 +1,46 @@
 <LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical">
-
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:orientation="horizontal"
         android:weightSum="1">
-
         <EditText
+            android:id="@+id/TFaddress"
             android:layout_width="269dp"
             android:layout_height="match_parent"
-            android:id="@+id/TFaddress"
             android:layout_weight="0.92" />
-
         <Button
+            android:id="@+id/Bsearch"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="96dp"
             android:layout_height="match_parent"
-            android:text="Search"
-            android:id="@+id/Bsearch"
             android:layout_gravity="right"
-            android:onClick="onSearch" />
+            android:onClick="onSearch"
+            android:text="Search" />
     </LinearLayout>
-
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:context=".MapsActivity">
+            <Button
+                android:id="@+id/addButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sell It!"
+                android:layout_gravity="bottom" />
+        </fragment>
 
 
     </LinearLayout>
-
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="386dp"
-        android:layout_height="588dp" android:id="@+id/map" tools:context=".MapsActivity"
-        android:name="com.google.android.gms.maps.SupportMapFragment" >
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add"
-        android:id="@+id/button" />
-</fragment>
-
 </LinearLayout>
