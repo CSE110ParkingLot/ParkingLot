@@ -11,7 +11,7 @@ import java.util.Calendar;
 /**
  * Created by shivanimall on 11/21/15.
  */
-public class DatePickerFragment extends DialogFragment
+public class DatePickerFragment1 extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
     @Override
@@ -24,10 +24,10 @@ public class DatePickerFragment extends DialogFragment
 
         // Create a new instance of DatePickerDialog and return it
         DatePickerDialog date = new DatePickerDialog(getActivity(), this, year, month, day);
-        date.setTitle("Set START Date for selling your spot!");
+        date.setTitle("Set END Date for selling your spot!");
         return date;
     }
-//***** USE THIS TO SEND INFO TO THE DATABASE
+    //***** USE THIS TO SEND INFO TO THE DATABASE
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the date chosen by the user
     }

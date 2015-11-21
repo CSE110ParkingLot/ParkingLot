@@ -68,10 +68,19 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                 final FragmentManager manager = getFragmentManager();
                 DialogFragment addButtonDialog = new AddButtonDialogFragment();
                 addButtonDialog.show(manager, "gh");
-                DialogFragment timePickerFragment = new TimePickerFragment();
-                timePickerFragment.show(manager, "timePicker");
+
+                DialogFragment dateFragment1 = new DatePickerFragment1();
+                dateFragment1.show(manager, "datePicker_end");
+
                 DialogFragment dateFragment = new DatePickerFragment();
-                dateFragment.show(manager, "datePicker");
+                dateFragment.show(manager, "datePicker_start");
+
+                DialogFragment timePickerFragment1 = new TimePickerFragment1();
+                timePickerFragment1.show(manager, "endtimePicker");
+
+                DialogFragment timePickerFragment = new TimePickerFragment();
+                timePickerFragment.show(manager, "starttimePicker");
+
                 /*Button btn1 = (Button) findViewById(R.id.button_startDate);
                 btn1.setOnClickListener(new View.OnClickListener() {
 

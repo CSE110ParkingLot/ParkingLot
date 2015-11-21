@@ -12,7 +12,7 @@ import java.util.Calendar;
 /**
  * Created by shivanimall on 11/21/15.
  */
-public class TimePickerFragment extends DialogFragment
+public class TimePickerFragment1 extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
 
     @Override
@@ -25,7 +25,7 @@ public class TimePickerFragment extends DialogFragment
         // Create a new instance of TimePickerDialog and return it
         TimePickerDialog tm = new TimePickerDialog(getActivity(), this, hour, minute,
                 DateFormat.is24HourFormat(getActivity()));
-        tm.setTitle("Set START time for selling your spot!");
+        tm.setTitle("Set END time for selling your spot!");
         return tm;
     }
 
