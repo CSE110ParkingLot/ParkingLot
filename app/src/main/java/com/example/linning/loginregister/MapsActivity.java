@@ -59,7 +59,7 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
         mLocationProvider = new LocationProvider(this, this);
-//****HEY PEOPLE! CHECK DATEPICKER AND TIMEPICKER CLASSES- SOME IMPORTANT MESSAGES THERE****
+//****HEY PEOPLE! CHECK ALL DATEPICKER AND TIMEPICKER CLASSES FRAGMENTS- SOME IMPORTANT MESSAGES THERE****
         addButton = (Button) findViewById(R.id.addButton);
         addButton.setVisibility(View.GONE);
         addButton.setOnClickListener(new View.OnClickListener() {
