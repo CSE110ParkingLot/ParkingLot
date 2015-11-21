@@ -1,6 +1,8 @@
 package com.example.linning.loginregister;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -10,6 +12,7 @@ import android.content.IntentSender;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -52,30 +55,36 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        final Bundle savedInstanceStateFinal = savedInstanceState;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        setUpMapIfNeeded();
+        mLocationProvider = new LocationProvider(this, this);
 
         addButton = (Button) findViewById(R.id.addButton);
         addButton.setVisibility(View.GONE);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager manager = getFragmentManager();
+                final FragmentManager manager = getFragmentManager();
                 DialogFragment addButtonDialog = new AddButtonDialogFragment();
                 addButtonDialog.show(manager, "gh");
-                //Dialog dialog = addButtonDialog.onCreateDialog(savedInstanceStateFinal);
-                //dialog.show();
+                DialogFragment timePickerFragment = new TimePickerFragment();
+                timePickerFragment.show(manager, "timePicker");
+                DialogFragment dateFragment = new DatePickerFragment();
+                dateFragment.show(manager, "datePicker");
+                /*Button btn1 = (Button) findViewById(R.id.button_startDate);
+                btn1.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        DialogFragment newFragment = new TimePickerFragment();
+                        newFragment.show(manager, "timePicker");
+                    }
+                });*/
             }
+
         });
-        setUpMapIfNeeded();
-        mLocationProvider = new LocationProvider(this, this);
     }
-
-
-    //onDialogNegativeClick
-      //      onDialogNegativeClick
-
     @Override
     protected void onResume() {
         super.onResume();
