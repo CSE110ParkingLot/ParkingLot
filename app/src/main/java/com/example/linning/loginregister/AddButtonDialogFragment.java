@@ -36,7 +36,7 @@ public class AddButtonDialogFragment extends DialogFragment {
             })
 
 */
-        builder.setTitle("Set NAME, CONTACT & RATE FOR THE PARKING SPOT")
+        builder.setTitle("ENTER SELLING INFO")
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //user adds the ok button

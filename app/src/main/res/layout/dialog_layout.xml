@@ -73,6 +73,7 @@
             android:id="@+id/editText_rate"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -81,14 +82,14 @@
         android:layout_height="wrap_content"
         android:weightSum="1">
 
-<!--        <TextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dialog_start"
             android:id="@+id/textView_start"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
-            android:layout_weight=".3" />-->
+            android:layout_weight=".3" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -96,13 +97,28 @@
             android:layout_height="wrap_content"
             android:layout_weight=".7">
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/pick_start_date"
+                android:id="@+id/pick_start_date"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/pick_end_date"
+                android:id="@+id/pick_end_date"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+
 <!--            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/set_start_date"
                 android:id="@+id/button_startDate"
                 android:layout_gravity="center_horizontal" />-->
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="showTimePickerDialog" />
@@ -117,7 +133,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="showDatePickerDialog" />
+                android:onClick="showDatePickerDialog" />-->
 <!--
             <Button
                 android:layout_width="wrap_content"
@@ -127,7 +143,7 @@
                 android:layout_gravity="center_horizontal" />-->
         </LinearLayout>
     </LinearLayout>
-<!--
+
 
     <LinearLayout
         android:orientation="horizontal"
@@ -135,41 +151,53 @@
         android:layout_height="wrap_content"
         android:weightSum="1">
 
-&lt;!&ndash;        <TextView
+      <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dialog_end"
             android:id="@+id/textView_end"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
-            android:layout_weight=".3" />&ndash;&gt;
+            android:layout_weight=".3" />
 
-      &lt;!&ndash;  <LinearLayout
+ <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".7">
 
-&lt;!&ndash;            <Button
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="@string/pick_start_time"
+         android:id="@+id/pick_start_time"
+         android:layout_marginLeft="10dp"
+         android:layout_marginRight="10dp" />
+
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="@string/pick_end_time"
+         android:id="@+id/pick_end_time"
+         android:layout_marginLeft="10dp"
+         android:layout_marginRight="10dp" />
+           <!-- <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/set_start_date"
                 android:id="@+id/button_endDate"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="3dp" />&ndash;&gt;
-
-
-&lt;!&ndash;
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/set_start_time"
                 android:id="@+id/button_endTime"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="3dp" />&ndash;&gt;
-        </LinearLayout>&ndash;&gt;
+                android:layout_marginLeft="3dp" />-->
+        </LinearLayout>
     </LinearLayout>
--->
+
 
     <!--<GridLayout-->
         <!--android:layout_width="match_parent"-->
