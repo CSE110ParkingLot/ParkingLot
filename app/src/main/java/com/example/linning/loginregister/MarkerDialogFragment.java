@@ -30,8 +30,8 @@ public class MarkerDialogFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         builder.setView(inflater.inflate(R.layout.marker_layout, null));
 
-        builder.setTitle(R.string.title)
-                .setPositiveButton(reserve, new DialogInterface.OnClickListener() {
+        builder.setTitle("Set NAME, CONTACT & RATE FOR THE PARKING SPOT")
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //user adds the ok button
                     }
@@ -40,6 +40,7 @@ public class MarkerDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                     }
                 });
+
         return builder.create();
     }
 

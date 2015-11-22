@@ -71,12 +71,14 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                 //dialog.show();
             }
         });
-        /*
+        mLocationProvider = new LocationProvider(this, this);
+        setUpMapIfNeeded();
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                for(int i = 0; i < displayLocations.markers.size(); i++) {
-                    if (displayLocations.markers.get(i).equals(marker)) {
+                for (int i = 0; i < displayLocations.markers.size(); i++) {
+                    if (displayLocations.markers.get(i).getPosition().latitude == marker.getPosition().latitude &&
+                            displayLocations.markers.get(i).getPosition().longitude == marker.getPosition().longitude) {
                         FragmentManager manager = getFragmentManager();
                         DialogFragment markerDialog = new MarkerDialogFragment();
                         markerDialog.show(manager, "markers");
@@ -86,9 +88,6 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                 return false;
             }
         });
-        */
-        setUpMapIfNeeded();
-        mLocationProvider = new LocationProvider(this, this);
     }
 
 
@@ -158,11 +157,14 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
-                    if (newMarker.equals(marker)) {
-                        FragmentManager manager = getFragmentManager();
-                        DialogFragment markerDialog = new MarkerDialogFragment();
-                        markerDialog.show(manager, "markers");
-                        return true;
+                    for (int i = 0; i < displayLocations.markers.size(); i++) {
+                        if (displayLocations.markers.get(i).getPosition().latitude == marker.getPosition().latitude &&
+                                displayLocations.markers.get(i).getPosition().longitude == marker.getPosition().longitude) {
+                            FragmentManager manager = getFragmentManager();
+                            DialogFragment markerDialog = new MarkerDialogFragment();
+                            markerDialog.show(manager, "markers");
+                            return true;
+                        }
                     }
                     return false;
                 }
