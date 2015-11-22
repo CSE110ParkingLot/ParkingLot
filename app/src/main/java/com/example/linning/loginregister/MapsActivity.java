@@ -1,6 +1,8 @@
 package com.example.linning.loginregister;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -10,6 +12,7 @@ import android.content.IntentSender;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -150,26 +153,11 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
             Address address = addressList.get(0);
             LatLng latLng = new LatLng(address.getLatitude() , address.getLongitude());
             newMarker = mMap.addMarker(new MarkerOptions().position(latLng).title(location));
-           // if(displayLocations.isLocationStored(displayLocations.markers, newMarker)) {
-                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(Marker marker) {
-                        if (newMarker.equals(marker)) {
-                            FragmentManager manager = getFragmentManager();
-                            DialogFragment markerDialog = new MarkerDialogFragment();
-                            markerDialog.show(manager, "marker");
-                            return true;
-                        }
-                        return false;
-                    }
-                });
-            //}
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
             if(!displayLocations.isLocationStored(displayLocations.markers, newMarker))
                  addButton.setVisibility(View.VISIBLE);
         }
     }
-
     /**
      * This is where we can add markers or lines, add listeners or move the camera. In this case, we
      * just add a marker near Africa.
