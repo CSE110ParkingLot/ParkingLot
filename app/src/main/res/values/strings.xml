@@ -19,4 +19,5 @@
     <string name="title">ADD PARKING INFO!</string>
     <string name="ok">OK</string>
     <string name="cancel">CANCEL</string>
+    <string name="address">Address</string>
 </resources>

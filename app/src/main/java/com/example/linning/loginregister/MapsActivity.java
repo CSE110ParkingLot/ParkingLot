@@ -68,6 +68,20 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                 //dialog.show();
             }
         });
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                for(int i = 0; i < displayLocations.markers.size(); i++) {
+                    if (displayLocations.markers.get(i).equals(marker)) {
+                        FragmentManager manager = getFragmentManager();
+                        DialogFragment markerDialog = new MarkerDialogFragment();
+                        markerDialog.show(manager, "markers");
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
         setUpMapIfNeeded();
         mLocationProvider = new LocationProvider(this, this);
     }
@@ -136,11 +150,26 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
             Address address = addressList.get(0);
             LatLng latLng = new LatLng(address.getLatitude() , address.getLongitude());
             newMarker = mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+           // if(displayLocations.isLocationStored(displayLocations.markers, newMarker)) {
+                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        if (newMarker.equals(marker)) {
+                            FragmentManager manager = getFragmentManager();
+                            DialogFragment markerDialog = new MarkerDialogFragment();
+                            markerDialog.show(manager, "marker");
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+            //}
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
             if(!displayLocations.isLocationStored(displayLocations.markers, newMarker))
                  addButton.setVisibility(View.VISIBLE);
         }
     }
+
     /**
      * This is where we can add markers or lines, add listeners or move the camera. In this case, we
      * just add a marker near Africa.
