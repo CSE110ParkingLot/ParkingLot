@@ -10,16 +10,17 @@
     <string name="editText_nameHint">First Last</string>
     <string name="dialog_phone">Phone</string>
     <string name="editText_phoneHint">(888) 888&#8211;8888</string>
-    <string name="dialog_start">Start</string>
+    <string name="dialog_start">Start-End Dates</string>
     <string name="set_start_date">Set Date</string>
     <string name="set_start_time">Set Time</string>
-    <string name="dialog_end">End</string>
+    <string name="dialog_end">Start-End Times</string>
     <string name="dialog_rate">Rate</string>
     <string name="editText_rateHint">0.00</string>
-    <string name="title">ADD PARKING INFO!</string>
-    <string name="pick_time">TIME SET</string>
-    <string name="pick_date">DATE SET</string>
-    pick_date
-    <string name="ok">OK</string>
+    <string name="pick_start_time">1:30 PM</string>
+    <string name="pick_end_time">2:30 PM</string>
+    <string name="pick_end_date">11/23/2015</string>
+    <string name="pick_start_date">11/23/2015</string>
+    <string name="ok">SET MY INFO</string>
     <string name="cancel">CANCEL</string>
+    <string name="address">Address</string>
 </resources>

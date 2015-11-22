@@ -12,6 +12,7 @@
         <EditText
             android:id="@+id/TFaddress"
             android:layout_width="269dp"
+            android:hint="Ex: 225 Broadway San Diego CA"
             android:layout_height="match_parent"
             android:layout_weight="0.92" />
         <Button

@@ -51,48 +51,49 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
     public DisplayLocations displayLocations;
     private Button addButton;
 
-
     private Marker newMarker;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        final Bundle savedInstanceStateFinal = savedInstanceState;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        setUpMapIfNeeded();
-        mLocationProvider = new LocationProvider(this, this);
 
-
-
-//****HEY PEOPLE! CHECK DATEPICKER AND TIMEPICKER CLASSES- SOME IMPORTANT MESSAGES THERE****
         addButton = (Button) findViewById(R.id.addButton);
         addButton.setVisibility(View.GONE);
-
-        final DialogFragment timePickerFragmentStart = new TimePickerFragment();
-        final DialogFragment timePickerFragmentEnd = new TimePickerFragment();
-        final DialogFragment dateFragmentStart = new DatePickerFragment();
-        final DialogFragment dateFragmentEnd = new DatePickerFragment();
-        final FragmentManager manager = getFragmentManager();
-
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                FragmentManager manager = getFragmentManager();
                 DialogFragment addButtonDialog = new AddButtonDialogFragment();
                 addButtonDialog.show(manager, "gh");
-
-                /*Button btn1 = (Button) findViewById(R.id.button_startDate);
-                btn1.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        DialogFragment newFragment = new TimePickerFragment();
-                        newFragment.show(manager, "timePicker");
-                    }
-                });*/
+                //Dialog dialog = addButtonDialog.onCreateDialog(savedInstanceStateFinal);
+                //dialog.show();
             }
-
+        });
+        mLocationProvider = new LocationProvider(this, this);
+        setUpMapIfNeeded();
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                for (int i = 0; i < displayLocations.markers.size(); i++) {
+                    if (displayLocations.markers.get(i).getPosition().latitude == marker.getPosition().latitude &&
+                            displayLocations.markers.get(i).getPosition().longitude == marker.getPosition().longitude) {
+                        FragmentManager manager = getFragmentManager();
+                        DialogFragment markerDialog = new MarkerDialogFragment();
+                        markerDialog.show(manager, "markers");
+                        return true;
+                    }
+                }
+                return false;
+            }
         });
     }
+
+
+    //onDialogNegativeClick
+      //      onDialogNegativeClick
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -153,6 +154,21 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
             Address address = addressList.get(0);
             LatLng latLng = new LatLng(address.getLatitude() , address.getLongitude());
             newMarker = mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    for (int i = 0; i < displayLocations.markers.size(); i++) {
+                        if (displayLocations.markers.get(i).getPosition().latitude == marker.getPosition().latitude &&
+                                displayLocations.markers.get(i).getPosition().longitude == marker.getPosition().longitude) {
+                            FragmentManager manager = getFragmentManager();
+                            DialogFragment markerDialog = new MarkerDialogFragment();
+                            markerDialog.show(manager, "markers");
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
             if(!displayLocations.isLocationStored(displayLocations.markers, newMarker))
                  addButton.setVisibility(View.VISIBLE);

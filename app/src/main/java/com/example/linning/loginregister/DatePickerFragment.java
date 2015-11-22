@@ -24,7 +24,9 @@ public class DatePickerFragment extends DialogFragment
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         // Create a new instance of DatePickerDialog and return it
-        return new DatePickerDialog(getActivity(), this, year, month, day);
+        DatePickerDialog date = new DatePickerDialog(getActivity(), this, year, month, day);
+        date.setTitle("Set START Date for selling your spot!");
+        return date;
     }
 //***** USE THIS TO SEND INFO TO THE DATABASE
     public void onDateSet(DatePicker view, int year, int month, int day) {
