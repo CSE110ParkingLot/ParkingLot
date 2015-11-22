@@ -8,6 +8,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Address;
 import android.location.Geocoder;
@@ -50,6 +51,7 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
     private LocationProvider mLocationProvider;
     public DisplayLocations displayLocations;
     private Button addButton;
+    private Button profileButton;
 
     private Marker newMarker;
 
@@ -86,6 +88,15 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                     }
                 }
                 return false;
+            }
+        });
+
+        profileButton = (Button) findViewById(R.id.profileButton);
+        profileButton.getBackground().setAlpha(255);
+        profileButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick( View v) {
+                    startActivity( new Intent(MapsActivity.this, MainActivity.class));
             }
         });
     }
@@ -170,8 +181,10 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                 }
             });
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
-            if(!displayLocations.isLocationStored(displayLocations.markers, newMarker))
-                 addButton.setVisibility(View.VISIBLE);
+            if(!displayLocations.isLocationStored(displayLocations.markers, newMarker)) {
+                addButton.setVisibility(View.VISIBLE);
+                addButton.getBackground().setAlpha(255);
+            }
         }
     }
     /**

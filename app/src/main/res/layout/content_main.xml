@@ -4,47 +4,66 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:background="@drawable/parkitbg2">
 
     <TextView
         android:layout_width="wrap_content"
         android:text="Name"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff" />
 
     <EditText
         android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="#d9ffffff"
+        android:autoText="true"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:textColor="#631343" />
 
     <TextView
         android:layout_width="wrap_content"
         android:text="Phone"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff" />
 
     <EditText
         android:id="@+id/etPhone"
         android:layout_width="match_parent"
         android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="#d9ffffff"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:textColor="#631343" />
 
     <TextView
         android:layout_width="wrap_content"
         android:text="Username"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff" />
 
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:inputType="textPassword"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="#d9ffffff"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:textColor="#631343" />
 
 
     <Button
         android:id="@+id/bLogout"
         android:text="Logout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="#631343" />
 
 </LinearLayout>
