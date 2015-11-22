@@ -51,6 +51,7 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
     public DisplayLocations displayLocations;
     private Button addButton;
 
+
     private Marker newMarker;
 
     @Override
@@ -59,19 +60,26 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
         mLocationProvider = new LocationProvider(this, this);
+
+
+
 //****HEY PEOPLE! CHECK DATEPICKER AND TIMEPICKER CLASSES- SOME IMPORTANT MESSAGES THERE****
         addButton = (Button) findViewById(R.id.addButton);
         addButton.setVisibility(View.GONE);
+
+        final DialogFragment timePickerFragmentStart = new TimePickerFragment();
+        final DialogFragment timePickerFragmentEnd = new TimePickerFragment();
+        final DialogFragment dateFragmentStart = new DatePickerFragment();
+        final DialogFragment dateFragmentEnd = new DatePickerFragment();
+        final FragmentManager manager = getFragmentManager();
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final FragmentManager manager = getFragmentManager();
+
                 DialogFragment addButtonDialog = new AddButtonDialogFragment();
                 addButtonDialog.show(manager, "gh");
-                DialogFragment timePickerFragment = new TimePickerFragment();
-                timePickerFragment.show(manager, "timePicker");
-                DialogFragment dateFragment = new DatePickerFragment();
-                dateFragment.show(manager, "datePicker");
+
                 /*Button btn1 = (Button) findViewById(R.id.button_startDate);
                 btn1.setOnClickListener(new View.OnClickListener() {
 
