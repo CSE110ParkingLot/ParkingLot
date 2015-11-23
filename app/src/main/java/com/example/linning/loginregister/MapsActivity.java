@@ -53,7 +53,7 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
     private Button addButton;
     private Button profileButton;
 
-    private Marker newMarker;
+    public Marker newMarker;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -66,8 +66,14 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Double markerLat = newMarker.getPosition().latitude;
+                Double markerLong = newMarker.getPosition().longitude;
+                Bundle bundle = new Bundle();
+                bundle.putDouble("markerLat", markerLat);
+                bundle.putDouble("markerLong", markerLong);
                 FragmentManager manager = getFragmentManager();
                 DialogFragment addButtonDialog = new AddButtonDialogFragment();
+                addButtonDialog.setArguments(bundle);
                 addButtonDialog.show(manager, "gh");
                 //Dialog dialog = addButtonDialog.onCreateDialog(savedInstanceStateFinal);
                 //dialog.show();

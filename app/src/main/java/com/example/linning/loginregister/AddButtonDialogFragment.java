@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 /**
  * Created by shivanimall on 11/14/15.
@@ -22,10 +23,15 @@ public class AddButtonDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
 
+        this.context = getActivity();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.dialog_layout, null));
-
+        final View view = inflater.inflate(R.layout.dialog_layout, null);
+        builder.setView(view);
+        Double lat = getArguments().getDouble("markerLat");
+        Double longt = getArguments().getDouble("markerLong");
+        final String latString = lat.toString();
+        final String longString = longt.toString();
         /*builder.setItems(R.id.button_startTime, new DialogInterface.OnClickListener() {
 
             @Override
@@ -36,10 +42,20 @@ public class AddButtonDialogFragment extends DialogFragment {
             })
 
 */
+
+
         builder.setTitle("ENTER SELLING INFO")
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //user adds the ok button
+                        EditText name = (EditText) view.findViewById(R.id.editText_name);
+                        String theName = name.getText().toString();
+                        String phone = ((EditText) view.findViewById(R.id.editText_phone)).getText().toString();
+                        String rate = ((EditText)view.findViewById(R.id.editText_rate)).getText().toString();
+                        String startDateTime = ((EditText)view.findViewById(R.id.pick_start_date)).getText().toString() + " " + ((EditText) view.findViewById(R.id.pick_start_time)).getText().toString();
+                        String endDateTime = ((EditText)view.findViewById(R.id.pick_end_date)).getText().toString() + " " + ((EditText)view.findViewById(R.id.pick_end_time)).getText().toString();
+                        String address = ((EditText)getActivity().findViewById(R.id.TFaddress)).getText().toString();
+                        new StoreSellingInfo(context).sendSellingInfo(theName, phone, rate, startDateTime, endDateTime, latString, longString, address);
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

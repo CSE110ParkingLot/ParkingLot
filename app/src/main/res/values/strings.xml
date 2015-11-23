@@ -5,6 +5,7 @@
     <string name="title_activity_register">Register</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_maps_activitydelete">Map</string>
+    <string name="site_url">http://cse110gogogo.web44.net/</string>
 
     <string name="dialog_name">Name</string>
     <string name="editText_nameHint">First Last</string>
@@ -16,11 +17,11 @@
     <string name="dialog_end">Start-End Times</string>
     <string name="dialog_rate">Rate</string>
     <string name="editText_rateHint">0.00</string>
-    <string name="pick_start_time">1:30 PM</string>
-    <string name="pick_end_time">2:30 PM</string>
-    <string name="pick_end_date">11/23/2015</string>
-    <string name="pick_start_date">11/23/2015</string>
-    <string name="ok">SET MY INFO</string>
+    <string name="pick_start_time">00:00</string>
+    <string name="pick_end_time">23:59</string>
+    <string name="pick_end_date">2015/11/12</string>
+    <string name="pick_start_date">2015/11/19</string>
+    <string name="ok">SELL IT!</string>
     <string name="cancel">CANCEL</string>
     <string name="address">Address</string>
 </resources>
