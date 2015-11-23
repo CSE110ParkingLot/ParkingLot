@@ -9,7 +9,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
 import org.apache.http.HttpEntity;
@@ -28,31 +27,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.AsyncTask;
-import android.view.View;
 import android.widget.TextView;
-
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RetrieveSpaceInfo {
     ProgressDialog progressDialog;
@@ -67,16 +42,16 @@ public class RetrieveSpaceInfo {
     private String address;
     private DialogFragment fragment;
     private int spaceId;
-
+    private Context context;
     private String startDateTime;
     private String endDateTime;
 
     private DialogFragment dialog;
     private Marker marker;
 
-    public RetrieveSpaceInfo(Context context, DialogFragment dialog) {
+    public RetrieveSpaceInfo(Context context) {
 
-        this.dialog = dialog;
+        this.context = context;
         progressDialog = new ProgressDialog(context);
         progressDialog.setCancelable(false);
         progressDialog.setTitle("Processing...");
@@ -85,12 +60,13 @@ public class RetrieveSpaceInfo {
 
     public void fetchUserDataAsyncTask() {
         progressDialog.show();
-        new FetchUserDataAsyncTask().execute();
+        //new FetchMarkerInfo().execute();
     }
 
-    public class FetchUserDataAsyncTask extends AsyncTask<String, Void, String> {
-
-        public FetchUserDataAsyncTask() {
+    public class FetchMarkerInfo extends AsyncTask<String, Void, String> {
+        private Context theContext;
+        public FetchMarkerInfo(Context context) {
+            theContext = context;
         }
 
         private HttpParams getHttpRequestParams() {
@@ -151,32 +127,31 @@ public class RetrieveSpaceInfo {
                 e.printStackTrace();
                 return;
             }
-            displayBuyInfo(fragment);
+            //displayBuyInfo(fragment);
             progressDialog.cancel();
         }
 
     }
 
-    protected void displayBuyInfo(DialogFragment fragment) {
-        View view = fragment.getView();
-        TextView setAddress = (TextView) view.findViewById(R.id.address);
-        setAddress.setText(address);
+    protected void displayBuyInfo(double latitude, double Longitude, TextView theAddress, TextView thePhone, TextView theName,
+                                  TextView theStartDateTime, TextView theEndDateTime, TextView theRate ) {
 
-        TextView setPhone = (TextView) view.findViewById(R.id.phone);
-        setPhone.setText(phone);
+        theAddress.setText(address);
 
-        TextView setName = (TextView) view.findViewById(R.id.name);
-        setName.setText(name);
+        thePhone.setText(phone);
 
-        TextView setStartDateTime = (TextView) view.findViewById(R.id.startDateTime);
-        setStartDateTime.setText(startDateTime);
+        theName.setText(name);
 
-        TextView setEndDateTime = (TextView) view.findViewById(R.id.endDateTime);
-        setEndDateTime.setText(endDateTime);
+        theStartDateTime.setText(startDateTime);
+
+        theEndDateTime.setText(endDateTime);
 
         String rateString = Double.toString(rate);
-        TextView setRate = (TextView) view.findViewById(R.id.rate);
-        setRate.setText(rateString);
+        theRate.setText(rateString);
+        progressDialog.show();
+        String lat = Double.toString(latitude);
+        String longi = Double.toString(Longitude);
+        new FetchMarkerInfo(context).execute(lat, longi);
     }
 
     protected int getSpaceId() {

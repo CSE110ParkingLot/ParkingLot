@@ -9,6 +9,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.Toast;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.linning.loginregister.R;
 
@@ -31,6 +33,15 @@ public class MarkerDialogFragment extends DialogFragment {
 
     private Context context;
     private RetrieveSpaceInfo spaceInfo;
+    private String name;
+    private int phone;
+    private double rate;
+    private String address;
+    private DialogFragment fragment;
+    private int spaceId;
+
+    private String startDateTime;
+    private String endDateTime;
 //    public AddButtonDialogFragment(Context theContext)
 //    {
 //        this.context = theContext;
@@ -41,11 +52,32 @@ public class MarkerDialogFragment extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         String reserve = "Reserve It!";
         context = getActivity();
+        Double Lat = getArguments().getDouble("marketLat");
+        Double Long = getArguments().getDouble("markerLong");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.marker_layout, null));
-        spaceInfo = new RetrieveSpaceInfo(context, this );
-        spaceInfo.displayBuyInfo(this);
+        View view = inflater.inflate(R.layout.marker_layout, null);
+        builder.setView(view);
+        TextView setAddress = (TextView) view.findViewById(R.id.address);
+        //setAddress.setText(address);
+
+        TextView setPhone = (TextView) view.findViewById(R.id.phone);
+       // setPhone.setText(phone);
+
+        TextView setName = (TextView) view.findViewById(R.id.name);
+        //setName.setText(name);
+
+        TextView setStartDateTime = (TextView) view.findViewById(R.id.startDateTime);
+        //setStartDateTime.setText(startDateTime);
+
+        TextView setEndDateTime = (TextView) view.findViewById(R.id.endDateTime);
+        //setEndDateTime.setText(endDateTime);
+
+        String rateString = Double.toString(rate);
+        TextView setRate = (TextView) view.findViewById(R.id.rate);
+        //setRate.setText(rateString);
+        spaceInfo = new RetrieveSpaceInfo(context);
+        spaceInfo.displayBuyInfo(Lat, Long, setAddress, setPhone, setName, setStartDateTime, setEndDateTime, setRate);
 
 
         builder.setTitle("Reserve This Spot!")

@@ -89,6 +89,11 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                 for (int i = 0; i < displayLocations.markers.size(); i++) {
                     if (displayLocations.markers.get(i).getPosition().latitude == marker.getPosition().latitude &&
                             displayLocations.markers.get(i).getPosition().longitude == marker.getPosition().longitude) {
+                        Double markerLat = marker.getPosition().latitude;
+                        Double markerLong = marker.getPosition().longitude;
+                        Bundle bundle = new Bundle();
+                        bundle.putDouble("markerLat", markerLat);
+                        bundle.putDouble("markerLong", markerLong);
                         FragmentManager manager = getFragmentManager();
                         DialogFragment markerDialog = new MarkerDialogFragment();
                         markerDialog.show(manager, "markers");
