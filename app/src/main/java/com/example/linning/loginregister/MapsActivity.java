@@ -52,15 +52,17 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
     public DisplayLocations displayLocations;
     private Button addButton;
     private Button profileButton;
+    private RetrieveSpaceInfo spaceInfo;
 
-    public Marker newMarker;
+    private Marker newMarker;
+    private Context context;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         final Bundle savedInstanceStateFinal = savedInstanceState;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
+        context = this;
         addButton = (Button) findViewById(R.id.addButton);
         addButton.setVisibility(View.GONE);
         addButton.setOnClickListener(new View.OnClickListener() {

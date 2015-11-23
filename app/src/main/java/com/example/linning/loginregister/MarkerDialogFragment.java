@@ -16,6 +16,7 @@ import com.example.linning.loginregister.R;
 public class MarkerDialogFragment extends DialogFragment {
 
     private Context context;
+    private RetrieveSpaceInfo spaceInfo;
 //    public AddButtonDialogFragment(Context theContext)
 //    {
 //        this.context = theContext;
@@ -25,10 +26,12 @@ public class MarkerDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         String reserve = "Reserve It!";
-
+        context = getActivity();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         builder.setView(inflater.inflate(R.layout.marker_layout, null));
+        spaceInfo = new RetrieveSpaceInfo(context, this );
+        spaceInfo.displayBuyInfo(this);
 
         builder.setTitle("Reserve This Spot!")
                 .setPositiveButton(reserve, new DialogInterface.OnClickListener() {
