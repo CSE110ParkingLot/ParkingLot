@@ -52,7 +52,7 @@ public class MarkerDialogFragment extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         String reserve = "Reserve It!";
         context = getActivity();
-        Double Lat = getArguments().getDouble("marketLat");
+        Double Lat = getArguments().getDouble("markerLat");
         Double Long = getArguments().getDouble("markerLong");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();

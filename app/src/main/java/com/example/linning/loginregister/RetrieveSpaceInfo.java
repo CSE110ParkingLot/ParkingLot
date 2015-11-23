@@ -26,6 +26,7 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -113,18 +114,18 @@ public class RetrieveSpaceInfo {
 
         @Override
         protected void onPostExecute(String result) {
-            JSONArray jArray = null;
+            JSONObject jArray = null;
             try {
-                jArray = new JSONArray(result);
+                jArray = new JSONObject(result);
 //                latitude = Double.parseDouble(jArray.getJSONObject(0).getString("latitude"));
 //                longitude = Double.parseDouble(jArray.getJSONObject(0).getString("longitude"));
-                name = jArray.getJSONObject(0).getString("name");
-                phone = jArray.getJSONObject(0).getString("phone");
-                rate = Double.parseDouble(jArray.getJSONObject(0).getString("rate"));
-                startDateTime = jArray.getJSONObject(0).getString("startDateTime");
-                endDateTime = jArray.getJSONObject(0).getString("endDateTime");
-                address = jArray.getJSONObject(0).getString("address");
-                spaceId = Integer.parseInt(jArray.getJSONObject(0).getString("space_id"));
+                name = jArray.getString("name");
+                phone = jArray.getString("phone");
+                rate = Double.parseDouble(jArray.getString("rate"));
+                startDateTime = jArray.getString("startDateTime");
+                endDateTime = jArray.getString("endDateTime");
+                address = jArray.getString("address");
+                spaceId = Integer.parseInt(jArray.getString("space_id"));
 
             }
             catch (JSONException e) {
@@ -140,6 +141,10 @@ public class RetrieveSpaceInfo {
     protected void displayBuyInfo(double latitude, double Longitude, TextView theAddress, TextView thePhone, TextView theName,
                                   TextView theStartDateTime, TextView theEndDateTime, TextView theRate ) {
 
+        String lat = Double.toString(latitude);
+        String longi = Double.toString(Longitude);
+        new FetchMarkerInfo(context).execute(lat, longi);
+
         theAddress.setText(address);
 
         thePhone.setText(phone);
@@ -153,9 +158,9 @@ public class RetrieveSpaceInfo {
         String rateString = Double.toString(rate);
         theRate.setText(rateString);
         progressDialog.show();
-        String lat = Double.toString(latitude);
-        String longi = Double.toString(Longitude);
-        new FetchMarkerInfo(context).execute(lat, longi);
+
+        System.out.println(lat);
+        System.out.println(longi);
     }
 
     protected int getSpaceId() {

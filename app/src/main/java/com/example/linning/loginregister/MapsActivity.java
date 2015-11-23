@@ -77,7 +77,7 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                 DialogFragment addButtonDialog = new AddButtonDialogFragment();
                 addButtonDialog.setArguments(bundle);
                 addButtonDialog.show(manager, "gh");
-                //Dialog dialog = addButtonDialog.onCreateDialog(savedInstanceStateFinal);
+                //Dialog dialog = addButtonDialog.onCr eateDialog(savedInstanceStateFinal);
                 //dialog.show();
             }
         });
@@ -91,6 +91,8 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                             displayLocations.markers.get(i).getPosition().longitude == marker.getPosition().longitude) {
                         Double markerLat = marker.getPosition().latitude;
                         Double markerLong = marker.getPosition().longitude;
+                        System.out.println(markerLat);
+                        System.out.println(markerLong);
                         Bundle bundle = new Bundle();
                         bundle.putDouble("markerLat", markerLat);
                         bundle.putDouble("markerLong", markerLong);
