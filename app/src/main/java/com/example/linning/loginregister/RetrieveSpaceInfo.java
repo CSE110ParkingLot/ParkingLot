@@ -15,7 +15,9 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
@@ -37,7 +39,7 @@ public class RetrieveSpaceInfo {
     private double longitude;
     private double latitude;
     private String name;
-    private int phone;
+    private String phone;
     private double rate;
     private String address;
     private DialogFragment fragment;
@@ -95,15 +97,17 @@ public class RetrieveSpaceInfo {
             String result = null;
 
             try {
+                post.setEntity(new UrlEncodedFormEntity(dataToSend));
                 HttpResponse httpResponse = client.execute(post);
-
-                HttpEntity entity = httpResponse.getEntity();
-                result = EntityUtils.toString(entity);
-
+//
+//                HttpEntity entity = httpResponse.getEntity();
+//                result = EntityUtils.toString(entity);
+                result = new BasicResponseHandler().handleResponse(httpResponse);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            int i = 0;
             return result;
         }
 
@@ -112,10 +116,10 @@ public class RetrieveSpaceInfo {
             JSONArray jArray = null;
             try {
                 jArray = new JSONArray(result);
-                latitude = Double.parseDouble(jArray.getJSONObject(0).getString("latitude"));
-                longitude = Double.parseDouble(jArray.getJSONObject(0).getString("longitude"));
+//                latitude = Double.parseDouble(jArray.getJSONObject(0).getString("latitude"));
+//                longitude = Double.parseDouble(jArray.getJSONObject(0).getString("longitude"));
                 name = jArray.getJSONObject(0).getString("name");
-                phone = Integer.parseInt(jArray.getJSONObject(0).getString("phone"));
+                phone = jArray.getJSONObject(0).getString("phone");
                 rate = Double.parseDouble(jArray.getJSONObject(0).getString("rate"));
                 startDateTime = jArray.getJSONObject(0).getString("startDateTime");
                 endDateTime = jArray.getJSONObject(0).getString("endDateTime");
@@ -125,7 +129,7 @@ public class RetrieveSpaceInfo {
             }
             catch (JSONException e) {
                 e.printStackTrace();
-                return;
+                //return;
             }
             //displayBuyInfo(fragment);
             progressDialog.cancel();

@@ -96,6 +96,7 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                         bundle.putDouble("markerLong", markerLong);
                         FragmentManager manager = getFragmentManager();
                         DialogFragment markerDialog = new MarkerDialogFragment();
+                        markerDialog.setArguments(bundle);
                         markerDialog.show(manager, "markers");
                         return true;
                     }
