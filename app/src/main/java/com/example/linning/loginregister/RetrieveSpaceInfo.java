@@ -39,22 +39,27 @@ public class RetrieveSpaceInfo {
    // public ArrayList<Marker> markers;
     private double longitude;
     private double latitude;
-    private String name;
-    private String phone;
-    private double rate;
-    private String address;
     private DialogFragment fragment;
     private int spaceId;
     private Context context;
-    private String startDateTime;
-    private String endDateTime;
-
+    private TextView address;
+    private TextView phone;
+    private TextView name;
+    private TextView startDateTime;
+    private TextView endDateTime;
+    private TextView rate;
     private DialogFragment dialog;
     private Marker marker;
 
-    public RetrieveSpaceInfo(Context context) {
+    public RetrieveSpaceInfo(Context context, TextView add, TextView phoneNum, TextView theName, TextView theStartDateTime, TextView theEndDateTime, TextView theRate) {
 
         this.context = context;
+        this.address = add;
+        this.phone = phoneNum;
+        this.name = theName;
+        this.startDateTime = theStartDateTime;
+        this.endDateTime = theEndDateTime;
+        this.rate = theRate;
         progressDialog = new ProgressDialog(context);
         progressDialog.setCancelable(false);
         progressDialog.setTitle("Processing...");
@@ -92,9 +97,6 @@ public class RetrieveSpaceInfo {
 
             HttpClient client = new DefaultHttpClient(httpRequestParams);
             HttpPost post = new HttpPost(SERVER_ADDRESS + "FetchSpaceInfo.php");
-
-            User returnedUser = null;
-
             String result = null;
 
             try {
@@ -114,18 +116,18 @@ public class RetrieveSpaceInfo {
 
         @Override
         protected void onPostExecute(String result) {
-            JSONObject jArray = null;
+            JSONObject jObj = null;
             try {
-                jArray = new JSONObject(result);
+                jObj = new JSONObject(result);
 //                latitude = Double.parseDouble(jArray.getJSONObject(0).getString("latitude"));
 //                longitude = Double.parseDouble(jArray.getJSONObject(0).getString("longitude"));
-                name = jArray.getString("name");
-                phone = jArray.getString("phone");
-                rate = Double.parseDouble(jArray.getString("rate"));
-                startDateTime = jArray.getString("startDateTime");
-                endDateTime = jArray.getString("endDateTime");
-                address = jArray.getString("address");
-                spaceId = Integer.parseInt(jArray.getString("space_id"));
+                name.setText(jObj.getString("name"));
+                phone.setText(jObj.getString("phone"));
+                rate.setText(Double.toString(jObj.getDouble("rate")));
+                startDateTime.setText(jObj.getString("startDateTime"));
+                endDateTime.setText(jObj.getString("endDateTime"));
+                address.setText(jObj.getString("address"));
+                spaceId = Integer.parseInt(jObj.getString("space_id"));
 
             }
             catch (JSONException e) {
@@ -138,29 +140,13 @@ public class RetrieveSpaceInfo {
 
     }
 
-    protected void displayBuyInfo(double latitude, double Longitude, TextView theAddress, TextView thePhone, TextView theName,
-                                  TextView theStartDateTime, TextView theEndDateTime, TextView theRate ) {
+    protected void displayBuyInfo(double latitude, double Longitude) {
 
         String lat = Double.toString(latitude);
         String longi = Double.toString(Longitude);
         new FetchMarkerInfo(context).execute(lat, longi);
-
-        theAddress.setText(address);
-
-        thePhone.setText(phone);
-
-        theName.setText(name);
-
-        theStartDateTime.setText(startDateTime);
-
-        theEndDateTime.setText(endDateTime);
-
-        String rateString = Double.toString(rate);
-        theRate.setText(rateString);
         progressDialog.show();
 
-        System.out.println(lat);
-        System.out.println(longi);
     }
 
     protected int getSpaceId() {

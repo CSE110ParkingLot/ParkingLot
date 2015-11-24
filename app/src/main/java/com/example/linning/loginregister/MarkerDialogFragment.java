@@ -76,8 +76,8 @@ public class MarkerDialogFragment extends DialogFragment {
         String rateString = Double.toString(rate);
         TextView setRate = (TextView) view.findViewById(R.id.rate);
         //setRate.setText(rateString);
-        spaceInfo = new RetrieveSpaceInfo(context);
-        spaceInfo.displayBuyInfo(Lat, Long, setAddress, setPhone, setName, setStartDateTime, setEndDateTime, setRate);
+        spaceInfo = new RetrieveSpaceInfo(context, setAddress, setPhone, setName, setStartDateTime, setEndDateTime, setRate);
+        spaceInfo.displayBuyInfo(Lat, Long);
 
 
         builder.setTitle("Reserve This Spot!")
