@@ -63,8 +63,10 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         context = this;
+        //Add Button is not visible until someone searches
         addButton = (Button) findViewById(R.id.addButton);
         addButton.setVisibility(View.GONE);
+        //When it is clicked it opens a dialogue
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +85,7 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
         });
         mLocationProvider = new LocationProvider(this, this);
         setUpMapIfNeeded();
+        //When click on marker, opens buying dialogue info
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -162,6 +165,7 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
             }
         }
     }
+    //When using the search bar.
     public void onSearch(View view)
     {
         EditText location_tf = (EditText)findViewById(R.id.TFaddress);
@@ -181,14 +185,29 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
             Address address = addressList.get(0);
             LatLng latLng = new LatLng(address.getLatitude() , address.getLongitude());
             newMarker = mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+            for (int i = 0; i < displayLocations.markers.size(); i++) {
+                if (displayLocations.markers.get(i).getPosition().latitude == newMarker.getPosition().latitude &&
+                        displayLocations.markers.get(i).getPosition().longitude == newMarker.getPosition().longitude) {
+                            addButton.setVisibility(View.GONE);
+                }
+            }
+                //If Marker is in the database, will open dialogue with buying info
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
                     for (int i = 0; i < displayLocations.markers.size(); i++) {
                         if (displayLocations.markers.get(i).getPosition().latitude == marker.getPosition().latitude &&
                                 displayLocations.markers.get(i).getPosition().longitude == marker.getPosition().longitude) {
+                            Double markerLat = marker.getPosition().latitude;
+                            Double markerLong = marker.getPosition().longitude;
+                            System.out.println(markerLat);
+                            System.out.println(markerLong);
+                            Bundle bundle = new Bundle();
+                            bundle.putDouble("markerLat", markerLat);
+                            bundle.putDouble("markerLong", markerLong);
                             FragmentManager manager = getFragmentManager();
                             DialogFragment markerDialog = new MarkerDialogFragment();
+                            markerDialog.setArguments(bundle);
                             markerDialog.show(manager, "markers");
                             return true;
                         }
@@ -196,11 +215,14 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                     return false;
                 }
             });
+            //If not in database, you can add it in
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
             if(!displayLocations.isLocationStored(displayLocations.markers, newMarker)) {
                 addButton.setVisibility(View.VISIBLE);
                 addButton.getBackground().setAlpha(255);
             }
+            else
+                addButton.setVisibility(View.GONE);
         }
     }
     /**

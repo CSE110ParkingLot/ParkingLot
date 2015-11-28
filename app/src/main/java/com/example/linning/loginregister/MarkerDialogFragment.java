@@ -27,6 +27,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Alix on 11/21/2015.
+ * What happens when you click the marker(display info to buy spot)
  */
 public class MarkerDialogFragment extends DialogFragment {
     public static final String SERVER_ADDRESS = "http://cse110gogogo.web44.net/";
@@ -52,12 +53,14 @@ public class MarkerDialogFragment extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         String reserve = "Reserve It!";
         context = getActivity();
+        //Gets Lat and Long from before
         Double Lat = getArguments().getDouble("markerLat");
         Double Long = getArguments().getDouble("markerLong");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.marker_layout, null);
         builder.setView(view);
+        //Gets where to put info
         TextView setAddress = (TextView) view.findViewById(R.id.address);
         //setAddress.setText(address);
 
@@ -81,12 +84,14 @@ public class MarkerDialogFragment extends DialogFragment {
 
 
         builder.setTitle("Reserve This Spot!")
+                //Positive action. Lets you reserve the spot
                 .setPositiveButton(reserve, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //user adds the ok button
                         reserveSpace(spaceInfo.getSpaceId());
                     }
                 })
+                //Negative action. Lets you cancel and get out of dialogue
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                     }
@@ -94,6 +99,7 @@ public class MarkerDialogFragment extends DialogFragment {
 
         return builder.create();
     }
+    //Reserves space
     protected void reserveSpace(final int space_id) {
 
         class ReserveSpaceAsyncTask extends AsyncTask<String, Void, String> {

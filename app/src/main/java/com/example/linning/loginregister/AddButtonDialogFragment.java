@@ -13,6 +13,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 /**
  * Created by shivanimall on 11/14/15.
  */
@@ -32,6 +36,7 @@ public class AddButtonDialogFragment extends DialogFragment {
         Double longt = getArguments().getDouble("markerLong");
         final String latString = lat.toString();
         final String longString = longt.toString();
+
         /*builder.setItems(R.id.button_startTime, new DialogInterface.OnClickListener() {
 
             @Override
