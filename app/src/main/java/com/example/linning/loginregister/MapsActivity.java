@@ -28,6 +28,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -42,6 +43,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements LocationProvider.LocationCallback{
@@ -53,8 +55,10 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
     public DisplayLocations displayLocations;
     private Button addButton;
     private Button profileButton;
+    private EditText searchText;
     private RetrieveSpaceInfo spaceInfo;
 
+    private ArrayList<Marker> markerList;
     private Marker newMarker;
     private Context context;
 
@@ -65,7 +69,7 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
         setContentView(R.layout.activity_maps);
         context = this;
         //Add Button is not visible until someone searches
-        EditText searchText = (EditText) findViewById(R.id.TFaddress);
+        searchText = (EditText) findViewById(R.id.TFaddress);
 
         addButton = (Button) findViewById(R.id.addButton);
         addButton.setVisibility(View.GONE);
@@ -185,15 +189,17 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
 
 
             } catch (IOException e) {
-                e.printStackTrace();
+                Toast toast = Toast.makeText(this, getString(R.string.locationError), Toast.LENGTH_SHORT);
+                toast.show();
+                return;
             }
 
             Address address = addressList.get(0);
             LatLng latLng = new LatLng(address.getLatitude() , address.getLongitude());
             newMarker = mMap.addMarker(new MarkerOptions().position(latLng).title(location));
-            for (int i = 0; i < displayLocations.markers.size(); i++) {
-                if (displayLocations.markers.get(i).getPosition().latitude == newMarker.getPosition().latitude &&
-                        displayLocations.markers.get(i).getPosition().longitude == newMarker.getPosition().longitude) {
+            for (int i = 0; i < markerList.size(); i++) {
+                if (markerList.get(i).getPosition().latitude == newMarker.getPosition().latitude &&
+                        markerList.get(i).getPosition().longitude == newMarker.getPosition().longitude) {
                             addButton.setVisibility(View.GONE);
                 }
             }
@@ -201,13 +207,11 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
-                    for (int i = 0; i < displayLocations.markers.size(); i++) {
-                        if (displayLocations.markers.get(i).getPosition().latitude == marker.getPosition().latitude &&
-                                displayLocations.markers.get(i).getPosition().longitude == marker.getPosition().longitude) {
+                    for (int i = 0; i < markerList.size(); i++) {
+                        if (markerList.get(i).getPosition().latitude == marker.getPosition().latitude &&
+                                markerList.get(i).getPosition().longitude == marker.getPosition().longitude) {
                             Double markerLat = marker.getPosition().latitude;
                             Double markerLong = marker.getPosition().longitude;
-                            System.out.println(markerLat);
-                            System.out.println(markerLong);
                             Bundle bundle = new Bundle();
                             bundle.putDouble("markerLat", markerLat);
                             bundle.putDouble("markerLong", markerLong);
@@ -258,6 +262,7 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
         displayLocations = new DisplayLocations(this, mMap);
         displayLocations.fetchUserDataAsyncTask();
+        markerList = displayLocations.markers;
 
     }
 
@@ -266,8 +271,19 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
      */
     public void doPositiveClick()
     {
+        if(newMarker != null) {
+            newMarker.remove();
+            newMarker = null;
+        }
+        if(addButton.getVisibility() == View.VISIBLE)
+        {
+            addButton.setVisibility(View.GONE);
+        }
         mMap.clear();
-        new DisplayLocations(this, mMap).fetchUserDataAsyncTask();
+        DisplayLocations tempTask = new DisplayLocations(this, mMap);
+        tempTask.fetchUserDataAsyncTask();
+        markerList = tempTask.markers;
+        searchText.setText("");
     }
 
 }

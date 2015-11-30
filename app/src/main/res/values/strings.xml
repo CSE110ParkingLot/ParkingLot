@@ -26,4 +26,5 @@
     <string name="address">Address</string>
     <string name="reserveStart">Reservation Start:</string>
     <string name="exampleAddress">Ex: 225 Broadway, San Diego</string>
+    <string name="locationError">Please enter a valid address.</string>
 </resources>

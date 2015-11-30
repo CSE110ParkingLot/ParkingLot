@@ -37,18 +37,6 @@ public class AddButtonDialogFragment extends DialogFragment {
         final String latString = lat.toString();
         final String longString = longt.toString();
 
-        /*builder.setItems(R.id.button_startTime, new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface arg0, int choosenAddress) {
-                final FragmentManager manager = getFragmentManager();
-                DialogFragment newFragment = new TimePickerFragment();
-                newFragment.show(manager, "timePicker");
-            })
-
-*/
-
-
         builder.setTitle("ENTER SELLING INFO")
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
