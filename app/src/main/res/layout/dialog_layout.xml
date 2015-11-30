@@ -27,7 +27,10 @@
         android:layout_height="wrap_content"
         android:hint="@string/editText_nameHint"
         android:id="@+id/editText_name"
+        android:singleLine="true"
         android:maxLength="20"
+        android:nextFocusDown="@+id/editText_phone"
+        android:imeOptions="actionNext"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp" />
 
@@ -41,8 +44,12 @@
 
     <EditText
         android:layout_width="match_parent"
+        android:singleLine="true"
         android:layout_height="wrap_content"
+        android:inputType="phone"
         android:id="@+id/editText_phone"
+        android:nextFocusDown="@+id/editText_rate"
+        android:imeOptions="actionNext"
         android:maxLength="20"
         android:hint="@string/editText_phoneHint"
         android:layout_marginLeft="10dp"
@@ -71,8 +78,12 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:hint="@string/editText_rateHint"
+            android:inputType="numberDecimal"
+            android:imeOptions="actionNext"
             android:id="@+id/editText_rate"
+            android:nextFocusDown="@+id/pick_start_date"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp" />
 
@@ -103,14 +114,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/pick_start_date"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
                 android:id="@+id/pick_start_date"
+                android:inputType="date"
+                android:nextFocusDown="@+id/pick_end_date"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp" />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/pick_end_date"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:inputType="date"
                 android:id="@+id/pick_end_date"
+                android:nextFocusDown="@+id/pick_start_time"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp" />
 
@@ -172,14 +191,21 @@
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:hint="@string/pick_start_time"
+         android:singleLine="true"
+         android:imeOptions="actionNext"
+         android:inputType="time"
          android:id="@+id/pick_start_time"
+         android:nextFocusDown="@+id/pick_end_time"
          android:layout_marginLeft="10dp"
          android:layout_marginRight="10dp" />
 
      <EditText
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
+         android:singleLine="true"
          android:hint="@string/pick_end_time"
+         android:imeOptions="actionGo"
+         android:inputType="time"
          android:id="@+id/pick_end_time"
          android:layout_marginLeft="10dp"
          android:layout_marginRight="10dp" />

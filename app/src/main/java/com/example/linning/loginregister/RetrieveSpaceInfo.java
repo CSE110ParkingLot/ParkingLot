@@ -102,9 +102,6 @@ public class RetrieveSpaceInfo {
             try {
                 post.setEntity(new UrlEncodedFormEntity(dataToSend));
                 HttpResponse httpResponse = client.execute(post);
-//
-//                HttpEntity entity = httpResponse.getEntity();
-//                result = EntityUtils.toString(entity);
                 result = new BasicResponseHandler().handleResponse(httpResponse);
 
             } catch (Exception e) {
@@ -119,8 +116,6 @@ public class RetrieveSpaceInfo {
             JSONObject jObj = null;
             try {
                 jObj = new JSONObject(result);
-//                latitude = Double.parseDouble(jArray.getJSONObject(0).getString("latitude"));
-//                longitude = Double.parseDouble(jArray.getJSONObject(0).getString("longitude"));
                 name.setText(jObj.getString("name"));
                 phone.setText(jObj.getString("phone"));
                 rate.setText(Double.toString(jObj.getDouble("rate")));
@@ -132,9 +127,7 @@ public class RetrieveSpaceInfo {
             }
             catch (JSONException e) {
                 e.printStackTrace();
-                //return;
             }
-            //displayBuyInfo(fragment);
             progressDialog.cancel();
         }
 

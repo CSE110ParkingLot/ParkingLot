@@ -61,6 +61,7 @@ public class AddButtonDialogFragment extends DialogFragment {
                         String endDateTime = ((EditText)view.findViewById(R.id.pick_end_date)).getText().toString() + " " + ((EditText)view.findViewById(R.id.pick_end_time)).getText().toString();
                         String address = ((EditText)getActivity().findViewById(R.id.TFaddress)).getText().toString();
                         new StoreSellingInfo(context).sendSellingInfo(theName, phone, rate, startDateTime, endDateTime, latString, longString, address);
+                        ((MapsActivity) getActivity()).doPositiveClick();
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

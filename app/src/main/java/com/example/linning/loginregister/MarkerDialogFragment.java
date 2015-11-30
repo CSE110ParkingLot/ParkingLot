@@ -89,6 +89,7 @@ public class MarkerDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         //user adds the ok button
                         reserveSpace(spaceInfo.getSpaceId());
+                        ((MapsActivity)getActivity()).doPositiveClick();
                     }
                 })
                 //Negative action. Lets you cancel and get out of dialogue

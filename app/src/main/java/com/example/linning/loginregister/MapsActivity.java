@@ -24,6 +24,7 @@ import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,6 +65,8 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
         setContentView(R.layout.activity_maps);
         context = this;
         //Add Button is not visible until someone searches
+        EditText searchText = (EditText) findViewById(R.id.TFaddress);
+
         addButton = (Button) findViewById(R.id.addButton);
         addButton.setVisibility(View.GONE);
         //When it is clicked it opens a dialogue
@@ -79,8 +82,17 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                 DialogFragment addButtonDialog = new AddButtonDialogFragment();
                 addButtonDialog.setArguments(bundle);
                 addButtonDialog.show(manager, "gh");
-                //Dialog dialog = addButtonDialog.onCr eateDialog(savedInstanceStateFinal);
-                //dialog.show();
+            }
+        });
+        searchText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if( (event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER) )
+                {
+                    onSearch(v);
+                    return true;
+                }
+                return false;
             }
         });
         mLocationProvider = new LocationProvider(this, this);
@@ -94,8 +106,6 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                             displayLocations.markers.get(i).getPosition().longitude == marker.getPosition().longitude) {
                         Double markerLat = marker.getPosition().latitude;
                         Double markerLong = marker.getPosition().longitude;
-                        System.out.println(markerLat);
-                        System.out.println(markerLong);
                         Bundle bundle = new Bundle();
                         bundle.putDouble("markerLat", markerLat);
                         bundle.putDouble("markerLong", markerLong);
@@ -119,10 +129,6 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
             }
         });
     }
-
-
-    //onDialogNegativeClick
-      //      onDialogNegativeClick
 
     @Override
     protected void onResume() {
@@ -255,5 +261,13 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
 
     }
 
+    /*
+    Used in MarkerDialogFragment. Refresh the map after the user hits reserve.
+     */
+    public void doPositiveClick()
+    {
+        mMap.clear();
+        new DisplayLocations(this, mMap).fetchUserDataAsyncTask();
+    }
 
 }
