@@ -6,6 +6,13 @@ import android.app.DialogFragment;
 /**
  * Created by shivanimall on 11/14/15.
  */
+
+/*
+* This class adds listeners for ok and cancel button that appear on the dialog when the user
+* clicks the sell it button.
+* */
+
+
 public class NoticeAddButtonDialog extends DialogFragment {
 
     /* The activity that creates an instance of this dialog fragment must

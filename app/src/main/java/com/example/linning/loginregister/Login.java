@@ -15,9 +15,9 @@ import android.widget.TextView;
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
     Button bLogin;
-    EditText etUsername, etPassword;
-    TextView registerLink;
-    UserLocalStore userLocalStore;
+    public EditText etUsername, etPassword;
+    public TextView registerLink;
+    public UserLocalStore userLocalStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         bLogin.setOnClickListener(this);
         registerLink.setOnClickListener(this);
         userLocalStore = new UserLocalStore(this);
+
+
     }
     @Override
     public void onClick(View view) {

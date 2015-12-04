@@ -27,7 +27,8 @@ import java.util.ArrayList;
 
 /**
  * Created by Alix on 11/21/2015.
- * What happens when you click the marker(display info to buy spot)
+ *
+ *
  */
 public class MarkerDialogFragment extends DialogFragment {
     public static final String SERVER_ADDRESS = "http://cse110gogogo.web44.net/";
@@ -43,10 +44,6 @@ public class MarkerDialogFragment extends DialogFragment {
 
     private String startDateTime;
     private String endDateTime;
-//    public AddButtonDialogFragment(Context theContext)
-//    {
-//        this.context = theContext;
-//    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Raymond on 11/22/2015.
+ * Created by linning on 11/22/2015.
  */
 public class StoreSellingInfo {
 

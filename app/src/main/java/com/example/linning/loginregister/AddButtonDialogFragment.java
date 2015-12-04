@@ -20,6 +20,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 /**
  * Created by shivanimall on 11/14/15.
  */
+
+/*
+* This class creates a dialog when the user clicks the sell it button.
+* and sends the entered information to the database.
+*
+* */
 public class AddButtonDialogFragment extends DialogFragment {
 
     private Context context;
