@@ -17,7 +17,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 /*
- * Gets location of user. Mainly based off a tutorial
+ * Gets location of user. Mainly based off a tutorial we found
  */
 public class LocationProvider implements
         GoogleApiClient.ConnectionCallbacks,
