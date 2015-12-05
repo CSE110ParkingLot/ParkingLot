@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- editTexts here are uneditable.  -->
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -6,6 +10,8 @@
     android:padding="10dp"
     android:layout_width="match_parent"
     android:background="@drawable/parkitbg2">
+
+    <!-- Name textfield, displays user's name   -->
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,7 +28,10 @@
         android:autoText="true"
         android:layout_marginTop="10dp"
         android:padding="10dp"
-        android:textColor="#631343" />
+        android:textColor="#631343"
+        android:editable="false"/>
+
+    <!-- Phone textfield, displays user's phone   -->
 
     <TextView
         android:layout_width="wrap_content"
@@ -38,7 +47,10 @@
         android:background="#d9ffffff"
         android:layout_marginTop="10dp"
         android:padding="10dp"
-        android:textColor="#631343" />
+        android:textColor="#631343"
+        android:editable="false"/>
+
+    <!-- Username textfield displays user's username  -->
 
     <TextView
         android:layout_width="wrap_content"
@@ -50,14 +62,15 @@
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_marginBottom="20dp"
-        android:inputType="textPassword"
         android:layout_height="wrap_content"
         android:background="#d9ffffff"
         android:paddingLeft="10dp"
         android:layout_marginTop="10dp"
         android:padding="10dp"
-        android:textColor="#631343" />
+        android:textColor="#631343"
+        android:editable="false"/>
 
+    <!-- Logout Button   -->
 
     <Button
         android:id="@+id/bLogout"
