@@ -29,6 +29,7 @@ public class StoreSellingInfo {
     private Context context;
     protected String baseURL;
 
+    /* Instantiates the progress dialog */
     public StoreSellingInfo(Context theContext)
     {
         this.context = theContext;
@@ -39,6 +40,7 @@ public class StoreSellingInfo {
         this.progressDialog.setMessage("Please wait...");
     }
 
+    /* Async Task that puts the parking space selling information into the database */
     public class StoreSellingInfoAsyncTask extends AsyncTask<String, Void, String>
     {
         @Override
@@ -73,15 +75,12 @@ public class StoreSellingInfo {
         @Override
         protected void onPostExecute(String result)
         {
-//            if(result == null)
-//            {
-//                showToast();
-//            }
             showToast(true);
             progressDialog.dismiss();
         }
     }
 
+    /* Shows a toast indicating that the user has succeeded or failed */
     protected void showToast(boolean succeeded)
     {
         if(!succeeded) {
@@ -95,6 +94,7 @@ public class StoreSellingInfo {
         }
     }
 
+    /* Calls the Async Task to store the selling information and show the progress dialog */
     public void sendSellingInfo(String... params)
     {
         progressDialog.show();

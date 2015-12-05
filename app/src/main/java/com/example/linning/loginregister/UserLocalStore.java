@@ -10,13 +10,14 @@ public class UserLocalStore {
 
     public static final String SP_NAME = "userDetails";
 
-
     SharedPreferences userLocalDatabase;
 
+    /* Allows access to the SharedPreferences of this user's phone */
     public UserLocalStore(Context context) {
         userLocalDatabase = context.getSharedPreferences(SP_NAME, 0);
     }
 
+    /* Stores user information in SharedPreferences */
     public void storeUserData(User user) {
         SharedPreferences.Editor userLocalDatabaseEditor = userLocalDatabase.edit();
         userLocalDatabaseEditor.putString("name", user.name);
@@ -42,12 +43,10 @@ public class UserLocalStore {
         if (userLocalDatabase.getBoolean("loggedIn", false) == false) {
             return null;
         }
-
         String name = userLocalDatabase.getString("name", "");
         String username = userLocalDatabase.getString("username", "");
         String password = userLocalDatabase.getString("password", "");
         int phone = userLocalDatabase.getInt("phone", -1);
-
         User user = new User(name, phone, username, password);
         return user;
     }

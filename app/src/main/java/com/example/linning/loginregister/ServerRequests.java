@@ -1,7 +1,6 @@
 package com.example.linning.loginregister;
 
-
-        import android.app.ProgressDialog;
+import android.app.ProgressDialog;
         import android.content.Context;
         import android.os.AsyncTask;
         import android.util.Log;
@@ -30,7 +29,7 @@ public class ServerRequests {
     public static final int CONNECTION_TIMEOUT = 1000 * 15;
     public static final String SERVER_ADDRESS = "http://cse110gogogo.web44.net/";
 
-
+    /* Instantiates the Progress Dialog */
     public ServerRequests(Context context) {
         progressDialog = new ProgressDialog(context);
         progressDialog.setCancelable(false);
@@ -38,22 +37,20 @@ public class ServerRequests {
         progressDialog.setMessage("Please wait...");
     }
 
+    /* Calls the Async Task to register the user's information on server */
     public void storeUserDataInBackground(User user,
                                           GetUserCallback userCallBack) {
         progressDialog.show();
         new StoreUserDataAsyncTask(user, userCallBack).execute();
     }
 
+    /* Calls the Async Task to log the user in */
     public void fetchUserDataAsyncTask(User user, GetUserCallback userCallBack) {
         progressDialog.show();
         new fetchUserDataAsyncTask(user, userCallBack).execute();
     }
 
-    /**
-     * parameter sent to task upon execution progress published during
-     * background computation result of the background computation
-     */
-
+    /* Async Task that registers the user's information */
     public class StoreUserDataAsyncTask extends AsyncTask<Void, Void, Void> {
         User user;
         GetUserCallback userCallBack;
@@ -104,6 +101,7 @@ public class ServerRequests {
 
     }
 
+    /* Async Task that logs the user in */
     public class fetchUserDataAsyncTask extends AsyncTask<Void, Void, User> {
         User user;
         GetUserCallback userCallBack;

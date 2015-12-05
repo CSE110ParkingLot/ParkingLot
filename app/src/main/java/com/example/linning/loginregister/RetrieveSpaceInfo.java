@@ -36,10 +36,6 @@ public class RetrieveSpaceInfo {
     ProgressDialog progressDialog;
     public static final int CONNECTION_TIMEOUT = 1000 * 15;
     public static final String SERVER_ADDRESS = "http://cse110gogogo.web44.net/";
-   // public ArrayList<Marker> markers;
-    private double longitude;
-    private double latitude;
-    private DialogFragment fragment;
     private int spaceId;
     private Context context;
     private TextView address;
@@ -48,11 +44,8 @@ public class RetrieveSpaceInfo {
     private TextView startDateTime;
     private TextView endDateTime;
     private TextView rate;
-    private DialogFragment dialog;
-    private Marker marker;
 
     public RetrieveSpaceInfo(Context context, TextView add, TextView phoneNum, TextView theName, TextView theStartDateTime, TextView theEndDateTime, TextView theRate) {
-
         this.context = context;
         this.address = add;
         this.phone = phoneNum;
@@ -66,12 +59,11 @@ public class RetrieveSpaceInfo {
         progressDialog.setMessage("Please wait...");
     }
 
-    public void fetchUserDataAsyncTask() {
-        progressDialog.show();
-        //new FetchMarkerInfo().execute();
-    }
-
+    /*
+        Async Task to retrieve the locations already stored in the database
+     */
     public class FetchMarkerInfo extends AsyncTask<String, Void, String> {
+
         private Context theContext;
         public FetchMarkerInfo(Context context) {
             theContext = context;
@@ -130,9 +122,9 @@ public class RetrieveSpaceInfo {
             }
             progressDialog.cancel();
         }
-
     }
 
+    /* Performs the AsyncTask */
     protected void displayBuyInfo(double latitude, double Longitude) {
 
         String lat = Double.toString(latitude);
@@ -142,6 +134,7 @@ public class RetrieveSpaceInfo {
 
     }
 
+    /* Find the space id of the marker (table id) */
     protected int getSpaceId() {
         return spaceId;
     }
