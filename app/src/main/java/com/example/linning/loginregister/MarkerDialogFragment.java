@@ -46,10 +46,15 @@ public class MarkerDialogFragment extends DialogFragment {
     private String endDateTime;
 
     @Override
+    /*
+     * Pop up that shows when a marker is that is in database(someone is selling) is clicked
+     */
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
         // Use the Builder class for convenient dialog construction
         String reserve = "Reserve It!";
         context = getActivity();
+
         //Gets Lat and Long from before
         Double Lat = getArguments().getDouble("markerLat");
         Double Long = getArguments().getDouble("markerLong");
@@ -57,28 +62,23 @@ public class MarkerDialogFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.marker_layout, null);
         builder.setView(view);
+
         //Gets where to put info
         TextView setAddress = (TextView) view.findViewById(R.id.address);
-        //setAddress.setText(address);
 
         TextView setPhone = (TextView) view.findViewById(R.id.phone);
-       // setPhone.setText(phone);
 
         TextView setName = (TextView) view.findViewById(R.id.name);
-        //setName.setText(name);
 
         TextView setStartDateTime = (TextView) view.findViewById(R.id.startDateTime);
-        //setStartDateTime.setText(startDateTime);
 
         TextView setEndDateTime = (TextView) view.findViewById(R.id.endDateTime);
-        //setEndDateTime.setText(endDateTime);
 
         String rateString = Double.toString(rate);
         TextView setRate = (TextView) view.findViewById(R.id.rate);
-        //setRate.setText(rateString);
+
         spaceInfo = new RetrieveSpaceInfo(context, setAddress, setPhone, setName, setStartDateTime, setEndDateTime, setRate);
         spaceInfo.displayBuyInfo(Lat, Long);
-
 
         builder.setTitle("Reserve This Spot!")
                 //Positive action. Lets you reserve the spot

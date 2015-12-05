@@ -11,7 +11,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <include layout="@layout/logout" />
     
 
 </android.support.design.widget.CoordinatorLayout>

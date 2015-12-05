@@ -1,40 +1,22 @@
 package com.example.linning.loginregister;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.IntentSender;
-import android.location.Location;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -56,29 +38,35 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
     private Button addButton;
     private Button profileButton;
     private EditText searchText;
-    private RetrieveSpaceInfo spaceInfo;
+   // private RetrieveSpaceInfo spaceInfo;
 
     private ArrayList<Marker> markerList;
     private Marker newMarker;
     private Context context;
 
     @Override
+    /*
+    When Map initializes
+     */
     protected void onCreate(final Bundle savedInstanceState) {
         final Bundle savedInstanceStateFinal = savedInstanceState;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         context = this;
-        //Add Button is not visible until someone searches
+        //Search bar
         searchText = (EditText) findViewById(R.id.TFaddress);
 
+        //The sell it button on bottom left
         addButton = (Button) findViewById(R.id.addButton);
+        //Initially not visible. ONLY visible when someone searches and its not in database
         addButton.setVisibility(View.GONE);
-        //When it is clicked it opens a dialogue
+        //When it is clicked it opens a dialogue to input info
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Double markerLat = newMarker.getPosition().latitude;
                 Double markerLong = newMarker.getPosition().longitude;
+                //Makes bundle to store the info
                 Bundle bundle = new Bundle();
                 bundle.putDouble("markerLat", markerLat);
                 bundle.putDouble("markerLong", markerLong);
@@ -88,6 +76,8 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                 addButtonDialog.show(manager, "gh");
             }
         });
+
+        //Functionality for keyboard
         searchText.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -99,8 +89,11 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                 return false;
             }
         });
+
+        //Gives current location
         mLocationProvider = new LocationProvider(this, this);
         setUpMapIfNeeded();
+
         //When click on marker, opens the buying dialogue info
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -124,12 +117,13 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
             }
         });
 
+        //Opens profile
         profileButton = (Button) findViewById(R.id.profileButton);
         profileButton.getBackground().setAlpha(255);
         profileButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick( View v) {
-                    startActivity( new Intent(MapsActivity.this, MainActivity.class));
+                    startActivity( new Intent(MapsActivity.this, LogoutActivity.class));
             }
         });
     }
@@ -149,18 +143,6 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
 
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
-     * installed) and the map has not already been instantiated.. This will ensure that we only ever
-     * call {@link #setUpMap()} once when {@link #mMap} is not null.
-     * <p/>
-     * If it isn't installed {@link SupportMapFragment} (and
-     * {@link com.google.android.gms.maps.MapView MapView}) will show a prompt for the user to
-     * install/update the Google Play services APK on their device.
-     * <p/>
-     * A user can return to this FragmentActivity after following the prompt and correctly
-     * installing/updating/enabling the Google Play services. Since the FragmentActivity may not
-     * have been completely destroyed during this process (it is likely that it would only be
-     * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
-     * method in {@link #onResume()} to guarantee that it will be called.
      */
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
@@ -175,7 +157,9 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
             }
         }
     }
-    //When using the search bar.
+    /*
+     * Called when search button is clicked.
+     */
     public void onSearch(View view)
     {
         EditText location_tf = (EditText)findViewById(R.id.TFaddress);
@@ -193,10 +177,13 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                 toast.show();
                 return;
             }
-
+            //Gets what is in searchbar and gets the long/lat of it
             Address address = addressList.get(0);
             LatLng latLng = new LatLng(address.getLatitude() , address.getLongitude());
+            //Places marker to show where that location is
             newMarker = mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+
+            //If that marker is already in the data base, the sell button should not be visible
             for (int i = 0; i < markerList.size(); i++) {
                 if (markerList.get(i).getPosition().latitude == newMarker.getPosition().latitude &&
                         markerList.get(i).getPosition().longitude == newMarker.getPosition().longitude) {
@@ -235,29 +222,19 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
                 addButton.setVisibility(View.GONE);
         }
     }
-    /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
-     * <p/>
-     * This should only be called once and when we are sure that {@link #mMap} is not null.
-     */
+
     private void setUpMap() {
-        //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
 
+    /*
+     * When location cahnges, animates camera
+     */
     public void handleNewLocation(Location location) {
         Log.d(TAG, location.toString());
 
         double currentLatitude = location.getLatitude();
         double currentLongitude = location.getLongitude();
         LatLng latLng = new LatLng(currentLatitude, currentLongitude);
-
-        //mMap.addMarker(new MarkerOptions().position(new LatLng(currentLatitude, currentLongitude)).title("Current Location"));
-        //MarkerOptions options = new MarkerOptions()
-        //  .position(latLng)
-        //   .title("I am here!");
-        // mMap.addMarker(options);
-        // mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.setMyLocationEnabled(true);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f));
         displayLocations = new DisplayLocations(this, mMap);

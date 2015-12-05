@@ -2,17 +2,12 @@ package com.example.linning.loginregister;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class LogoutActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button bLogout;
     EditText etName, etPhone, etUsername;
@@ -20,11 +15,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     @Override
+    /*
+     * Assign variables to textfields that will show info
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-       // setSupportActionBar(toolbar);
+        setContentView(R.layout.logout_activity);
 
         etName = (EditText) findViewById(R.id.etName);
         etPhone = (EditText) findViewById(R.id.etPhone);
@@ -36,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    /*
+     * Shows profile info
+     */
     protected void onStart() {
         super.onStart();
         if (authenticate() == true) {
@@ -43,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /*
+     * If log in correctly
+     */
     private boolean authenticate() {
         if (userLocalStore.getLoggedInUser() == null) {
             Intent intent = new Intent(this, Login.class);
@@ -52,6 +54,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
     @Override
+    /*
+     * Logs out of app. Goes back to login
+     */
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bLogout:
@@ -63,6 +68,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /*
+     * Shows details
+     */
     private void displayUserDetails() {
         User user = userLocalStore.getLoggedInUser();
         etUsername.setText(user.username);
