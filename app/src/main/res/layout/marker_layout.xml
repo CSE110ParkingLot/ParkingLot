@@ -11,6 +11,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp" />
 
+    <!-- Text view that will display the address of the marker !-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,6 +37,7 @@
 
     </RelativeLayout>
 
+    <!-- Text view that will display the name of the seller of the marker !-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,6 +53,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp" />
 
+    <!-- Text view that will display the phone number of the seller of the marker !-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,6 +81,7 @@
             android:id="@+id/textView_dollarSign"
             android:layout_marginLeft="10dp" />
 
+        <!-- Text view that will display the rate of the seller of the marker !-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,6 +100,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp" />
 
+    <!-- Text view that will display the starting date time of the space !-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -111,6 +116,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp" />
 
+    <!-- Text view that will display the ending date time of the space !-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

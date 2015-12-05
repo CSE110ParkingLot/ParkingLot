@@ -22,6 +22,7 @@
 
     </RelativeLayout>
 
+    <!-- Text field to input name !-->
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,6 +43,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp" />
 
+    <!-- Text field to input phone !-->
     <EditText
         android:layout_width="match_parent"
         android:singleLine="true"
@@ -75,6 +77,7 @@
             android:id="@+id/textView_dollarSign"
             android:layout_marginLeft="10dp" />
 
+        <!-- Text field to input rate !-->
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,6 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_weight=".7">
 
+            <!-- Text field to input start date !-->
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,6 +125,8 @@
                 android:nextFocusDown="@+id/pick_end_date"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp" />
+
+            <!-- Text field to input end date !-->
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -133,38 +139,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp" />
 
-<!--            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/set_start_date"
-                android:id="@+id/button_startDate"
-                android:layout_gravity="center_horizontal" />-->
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="showTimePickerDialog" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="showDatePickerDialog" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="showTimePickerDialog" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="showDatePickerDialog" />-->
-<!--
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/set_start_time"
-                android:id="@+id/button_startTime"
-                android:layout_gravity="center_horizontal" />-->
         </LinearLayout>
     </LinearLayout>
-
 
     <LinearLayout
         android:orientation="horizontal"
@@ -181,74 +157,38 @@
             android:layout_marginLeft="10dp"
             android:layout_weight=".3" />
 
- <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7">
+         <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".7">
 
-     <EditText
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:hint="@string/pick_start_time"
-         android:singleLine="true"
-         android:imeOptions="actionNext"
-         android:inputType="time"
-         android:id="@+id/pick_start_time"
-         android:nextFocusDown="@+id/pick_end_time"
-         android:layout_marginLeft="10dp"
-         android:layout_marginRight="10dp" />
+             <!-- Text field to input start time !-->
+             <EditText
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:hint="@string/pick_start_time"
+                 android:singleLine="true"
+                 android:imeOptions="actionNext"
+                 android:inputType="time"
+                 android:id="@+id/pick_start_time"
+                 android:nextFocusDown="@+id/pick_end_time"
+                 android:layout_marginLeft="10dp"
+                 android:layout_marginRight="10dp" />
 
-     <EditText
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:singleLine="true"
-         android:hint="@string/pick_end_time"
-         android:imeOptions="actionGo"
-         android:inputType="time"
-         android:id="@+id/pick_end_time"
-         android:layout_marginLeft="10dp"
-         android:layout_marginRight="10dp" />
-           <!-- <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/set_start_date"
-                android:id="@+id/button_endDate"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="3dp" />&ndash;&gt;
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/set_start_time"
-                android:id="@+id/button_endTime"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="3dp" />-->
-        </LinearLayout>
+             <!-- Text field to input end time !-->
+             <EditText
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:singleLine="true"
+                 android:hint="@string/pick_end_time"
+                 android:imeOptions="actionGo"
+                 android:inputType="time"
+                 android:id="@+id/pick_end_time"
+                 android:layout_marginLeft="10dp"
+                 android:layout_marginRight="10dp" />
+
+         </LinearLayout>
     </LinearLayout>
-
-
-    <!--<GridLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:columnCount="3"-->
-        <!--android:rowCount="3">-->
-
-        <!--<Button-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="DONE"-->
-            <!--android:id="@+id/ok"-->
-            <!--android:layout_column="2"-->
-            <!--android:layout_row="2" />-->
-
-        <!--<Button-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="CANCEL"-->
-            <!--android:id="@+id/cancel"-->
-            <!--android:layout_column="0"-->
-            <!--android:layout_row="2" />-->
-    <!--</GridLayout>-->
-
 
 </LinearLayout>

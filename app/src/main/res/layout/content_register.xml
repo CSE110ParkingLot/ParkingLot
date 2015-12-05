@@ -8,7 +8,6 @@
     android:background="@drawable/parkitbg2">
 
     <!-- Name textfield   -->
-
     <EditText
         android:id="@+id/etName"
         android:hint=" Name"
@@ -22,7 +21,6 @@
         android:layout_marginTop="30dp" />
 
     <!-- Phone Number textfield   -->
-
     <EditText
         android:id="@+id/etPhone"
         android:hint=" Phone Number"
@@ -35,7 +33,6 @@
         android:textColorHint="#000000"/>
 
     <!-- Username textfield   -->
-
     <EditText
         android:id="@+id/etUsername"
         android:hint=" Username"
@@ -48,7 +45,6 @@
         android:textColorHint="#000000"/>
 
     <!-- Password textfield   -->
-
     <EditText
         android:id="@+id/etPassword"
         android:hint=" Password"
@@ -61,7 +57,6 @@
         android:textColorHint="#000000" />
 
     <!-- Register Button   -->
-
     <Button
         android:id="@+id/bRegister"
         android:text="Register"
