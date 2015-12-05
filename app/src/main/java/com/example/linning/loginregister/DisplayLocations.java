@@ -22,7 +22,6 @@ package com.example.linning.loginregister;
         import org.json.JSONException;
 
         import java.util.ArrayList;
-        import java.util.List;
 
 /**
  * Created by linning on 10/24/15.
@@ -37,6 +36,10 @@ public class DisplayLocations {
     private GoogleMap gMap;
     private Marker marker;
 
+    /*
+        Constructor for this class;
+        Takes the context of the class that calls this class and the GoogleMap to be modified.
+     */
     public DisplayLocations(Context context, GoogleMap map) {
         latitude = new ArrayList<Double>();
         longitude = new ArrayList<Double>();
@@ -48,14 +51,20 @@ public class DisplayLocations {
         progressDialog.setMessage("Please wait...");
     }
 
+    /*
+        Performs the async task and shows the dialog
+     */
     public void fetchUserDataAsyncTask() {
         progressDialog.show();
-        new FetchUserDataAsyncTask().execute();
+        new FetchMarkersAsyncTask().execute();
     }
 
-    public class FetchUserDataAsyncTask extends AsyncTask<Void, Void, String> {
+    /*
+        Async Task to retrieve marker information from database
+     */
+    public class FetchMarkersAsyncTask extends AsyncTask<Void, Void, String> {
 
-        public FetchUserDataAsyncTask() {}
+        public FetchMarkersAsyncTask() {}
 
         @Override
         protected String doInBackground(Void... params) {
@@ -116,15 +125,9 @@ public class DisplayLocations {
 
     }
 
-//    protected void displayLocation(GoogleMap map){
-//
-//        for(int i = 0; i < latitude.size(); i++ ) {
-//            double lat = latitude.get(i);
-//            double longi = longitude.get(i);
-//            LatLng locationparking = new LatLng(lat, longi);
-//            map.addMarker(new MarkerOptions().position(locationparking).title("Marker for Parking Lot"));
-//        }
-//    }
+    /*
+        Checks if marker location is identical to any marker in the list of locations in the database
+     */
     public boolean isLocationStored(ArrayList<Marker> markers, Marker mark) {
         for(int i = 0; i < markers.size() - 1; i++) {
             if(markers.get(i).getPosition().latitude == mark.getPosition().latitude &&

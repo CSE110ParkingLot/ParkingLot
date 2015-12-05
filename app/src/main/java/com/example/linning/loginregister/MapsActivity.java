@@ -101,7 +101,7 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
         });
         mLocationProvider = new LocationProvider(this, this);
         setUpMapIfNeeded();
-        //When click on marker, opens buying dialogue info
+        //When click on marker, opens the buying dialogue info
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
