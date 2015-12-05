@@ -27,6 +27,12 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login> {
         super(Login.class);
     }
 
+    /*
+     *  Given that the user is on the Login page and has a valid username and password,
+     *  when the user inputs their login credentials and clicks Login,
+     *  then the user will be directed to the MapsActivity page.
+     */
+
     /* Given that the user is on the Login page */
     @Override
     public void setUp() throws Exception

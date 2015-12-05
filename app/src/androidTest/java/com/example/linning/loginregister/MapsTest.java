@@ -22,6 +22,14 @@ public class MapsTest extends ActivityInstrumentationTestCase2{
         super(MapsActivity.class);
     }
 
+    /*
+     * Given that the user is logged in,
+     * when they search an address and click search,
+     * then the map will focus on the address;
+     * when the user clicks the sell it button,
+     * then they should see a dialog pop up where selling WOULD BE inputted.
+     */
+
     @Override
     public void setUp() throws Exception
     {
