@@ -38,8 +38,6 @@ public class MapsActivity extends FragmentActivity implements LocationProvider.L
     private Button addButton;
     private Button profileButton;
     private EditText searchText;
-   // private RetrieveSpaceInfo spaceInfo;
-
     private ArrayList<Marker> markerList;
     private Marker newMarker;
     private Context context;
