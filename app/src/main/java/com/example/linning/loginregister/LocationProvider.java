@@ -92,9 +92,6 @@ public class LocationProvider implements
     public void onConnectionFailed(ConnectionResult connectionResult) {
         /*
          * Google Play services can resolve some errors it detects.
-         * If the error has a resolution, try sending an Intent to
-         * start a Google Play services activity that can resolve
-         * error.
          */
         if (connectionResult.hasResolution() && mContext instanceof Activity) {
             try {
